@@ -1,0 +1,13 @@
+task3
+(b) as shown in the plot, there is huge spike when the array size is larger than 2048. From 
+the lecture, we know that this is caused by switching between eager mode and rendezvous mode. 
+To estimate the bandwidth and latency, we can start with redezvous mode.
+
+latency: latency is the intercept at figure and it should remove the eager mode. Read from the 
+figure, it would be 3 ms (6 ms for two send, then divide by 2) 
+
+bandwidth: bandwidth is the inverse of slope ratio for rendezvous mode and we can read from the figure.
+bandwidth will be around 2.6 gb/s.
+
+I am not sure about the Euler hardware but check with lecture and it shows bandwidth 
+4gb/s and latency 4 um. It is roughly equal to what I have on Euler. 

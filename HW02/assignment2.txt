@@ -1,0 +1,57 @@
+task3 f)
+
+elapsed time for three mmul: mmul2 < mmul1 < mmul3
+The major reason for these performance gaps is the different localities of the cache when implemented mmul algorithm.
+First, without looking at three outer loops, the basic code looks like below:
+
+```
+C[i * n + j] += A[i * n + k] * B[j + n * k];
+```
+
+Notice that how the orders of iterators can significantly influence the locality, such that impact the program performance.
+
+For the mmul1, the loop is organized in such way:
+
+```
+  for (uint i = 0; i < n; i++) {
+    for (uint j = 0; j < n; j++) {
+      for (uint k = 0; k < n; k++) {
+        C[i * n + j] += A[i * n + k] * B[j + n * k];
+      }
+    }
+  }
+```
+In this implementation, only A has locality as the loop will reach the each element in memory sequentially. 
+The innermost iterator is k and matrix A is adding k in each iteration, therefore, elements in A are accessed 
+one adjacent to another one. However, for C and B, the loop has to jump into the disconsective area of memory as they
+are increase by j, which causes locality overhead.
+
+For the mmul2, the loop is organized in such way:
+
+```
+  for (uint i = 0; i < n; i++) {
+    for (uint k = 0; k < n; k++) {
+      for (uint j = 0; j < n; j++) {
+        C[i * n + j] += A[i * n + k] * B[j + n * k];
+      }
+    }
+  }
+```
+Unlike mmul1, both C and B has localities in the iteration because the innermost interator changed to j. 
+
+For the mmul3, even worst:
+```
+  for (uint i = 0; i < n; i++) {
+    for (uint k = 0; k < n; k++) {
+      for (uint j = 0; j < n; j++) {
+        C[i * n + j] += A[i * n + k] * B[j + n * k];
+      }
+    }
+  }
+```
+There is no matrix variable has locality, which cause tremendous overhead.
+
+As for mmul1 which is array and mmul4 which is vector, their performances are almost identical. In some of my tests, the mmul4 even quicker.
+First of all, since they have the same locality, there is no surprise that they get similiar performance. For similarity, both of array and vector are blocks of memory
+to store sequential data. The major difference  is the vector, which is an object of builtin standard container. Vector is nothing but
+a thin wrapper for the array, except vector offers a couple of method(pop, push_back) for easy use. 

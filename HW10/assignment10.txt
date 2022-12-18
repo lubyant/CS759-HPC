@@ -1,0 +1,11 @@
+Task2
+(d)
+pure OMP has higher performance when the array size is less than 2**22.
+
+for a smaller size array, pure OMP is better for reduction since it requires less memory to store
+and process the operation. Using MPI will lead to unecessary overhead when different nodes and machines
+talk to each other.
+
+For a larger size array, MPI+OMP is better for performance. When the array is too large, the demand for 
+memory might exceeds the memory of hardware such that it needs several machines to compute. For this
+case, MPI has a better performance because it allows to run the code on different machines.

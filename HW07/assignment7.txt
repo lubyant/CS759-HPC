@@ -1,0 +1,6 @@
+Task 1
+(d) When the size of array is relative small, I got the best performance of 
+cuda computing rather than thrust or cub. While the size of array becomes huge 
+like two power of 30, cub performance gets better. It seems that cub provides
+somewhat better implementations than others so that it achieves best performance
+However, it is finest level of implementations so the codes looks unfriendly.

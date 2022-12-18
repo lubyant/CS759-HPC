@@ -1,0 +1,8 @@
+Task2
+(c) The overall trend is that the performance increases as the more threads increases up
+to 10 threads but after 10 threads, performance roughly stays the same. The can be explained
+by the Amdahl's law that multi-threads speedup has its maximum roofline no matter how many
+threads you work on it. In this task, there are several factor that restrict performance. For 
+example, besides the parallel block, there are still a couple of task need to proceed sequentially,
+such as summation of the convulution. Another possible reason is this task can restricted by its
+bandwidth such that program need to wait the data for calculation no matter how many cores you have.

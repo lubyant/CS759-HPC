@@ -1,0 +1,22 @@
+2. 
+(a) cd somedir
+(b) cat sometext.txt
+(c) tail -n 5 sometext.txt 
+(d) ls | grep .txt | xargs tail -n 5 
+(e) echo {0..6}
+
+3. 
+(a) no module is loaded unless user manually loads module
+(b) gcc (GCC) 12.1.1 20220507 
+(c) nvidia/cuda/10.2.2, nvidia/cuda/11.0.3, nvidia/cuda/11.3.1, nvidia/cuda/11.6.0
+(d) blas/openblas/0.3.19 : baisc linear algebra subprogram for fast matrix multiplication
+
+5.
+(a) On your working directory where you submit your job command
+(b) It is your unique ID in Euler job scheduler queue
+(c) On program level: you can write a log function in your code to periodically log your 
+program output into a file
+On Euler level: you can run command "squeue -u username" to check status of all your jobs in queue list
+(d) Run command "scancel job#". where job# is your SLURM_JOB_ID
+(e) Require special hardware, in this case, I am requiring one gpu for my task
+(f) Submit a job array for a serial of jobs. In this case, I will submit 10 jobs in a row.
